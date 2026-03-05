@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>诗歌库</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">
+        <span class="logo-icon">🎵</span>
+        <h1>诗歌库</h1>
+      </div>
+      <div class="header-actions">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="text" id="searchInput" placeholder="搜索歌曲名称..." />
+        </div>
+        <button id="loginBtn" class="btn-login">管理员登录</button>
+        <div id="adminInfo" class="admin-info" style="display: none;">
+          <span class="admin-name"></span>
+          <span class="admin-role"></span>
+          <button id="logoutBtn" class="btn-logout">退出</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 管理员工具栏 -->
+  <div id="adminToolbar" class="admin-toolbar" style="display: none;">
+    <div class="container">
+      <div class="toolbar-content">
+        <div class="toolbar-title">🛠️ 管理员工具</div>
+        <div class="toolbar-actions">
+          <button id="addSongBtn" class="btn-secondary btn-add">🎵 新增歌曲</button>
+          <button id="addCategoryBtn" class="btn-secondary btn-add">📂 管理分类</button>
+          <button id="trashBtn" class="btn-secondary btn-trash">🗑️ 回收站</button>
+          <button id="manageUsersBtn" class="btn-secondary btn-manage" style="display: none;">👥 用户管理</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主内容区 -->
+  <main class="main">
+    <div class="container main-content">
+      <!-- 左侧分类侧边栏 -->
+      <aside class="sidebar">
+        <nav class="category-nav">
+          <div class="category-header">
+            <span>📂 分类</span>
+          </div>
+          <div id="categoryList" class="category-list">
+            <!-- 分类列表将通过JavaScript动态加载 -->
+          </div>
+        </nav>
+      </aside>
+
+      <!-- 右侧歌曲内容区 -->
+      <section class="content">
+        <div class="content-header">
+          <h2 id="currentCategoryTitle">全部歌曲</h2>
+          <span id="songCount" class="song-count">0 首歌曲</span>
+        </div>
+
+        <!-- 歌曲网格 -->
+        <div id="songsGrid" class="songs-grid">
+          <!-- 歌曲卡片将通过JavaScript动态加载 -->
+        </div>
+
+        <!-- 空状态 -->
+        <div id="emptyState" class="empty-state" style="display: none;">
+          <div class="empty-icon">🎵</div>
+          <h3>暂无歌曲</h3>
+          <p>该分类下还没有歌曲</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- 歌曲详情弹窗 -->
+  <div id="songModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content score-detail">
+      <div class="modal-header">
+        <div class="score-header-wrapper">
+          <h2 id="modalSongTitle" class="score-title"></h2>
+          <div class="score-meta">
+            <span id="modalCategory" class="badge category-badge"></span>
+            <span class="meta-separator">•</span>
+            <span id="modalCreatedAt" class="text-meta"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <!-- 诗歌图片展示 -->
+        <div id="scoreImageContainer" class="score-image-container" style="display: none;">
+          <img id="modalScoreImage" alt="完整诗歌" class="score-full-image" />
+          <div class="image-toolbar">
+            <button class="btn-zoom-in" title="放大" onclick="zoomIn()">🔍+</button>
+            <button class="btn-zoom-out" title="缩小" onclick="zoomOut()">🔍-</button>
+            <button class="btn-download" title="下载" onclick="downloadImage()">⬇️</button>
+          </div>
+        </div>
+
+        <!-- 诗歌文字内容 -->
+        <div id="textContentContainer" class="score-text-section" style="display: none;">
+          <h3>📝 诗歌内容</h3>
+          <div class="score-text">
+            <pre id="modalContent"></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- 管理员操作按钮 -->
+      <div id="modalAdminActions" class="modal-footer" style="display: none;">
+        <button class="btn-secondary" onclick="closeModal()">关闭</button>
+        <button id="editSongBtn" class="btn-primary">✏️ 编辑诗歌</button>
+        <button id="deleteSongBtn" class="btn-danger">🗑️ 删除</button>
+      </div>
+
+      <!-- 普通用户按钮 -->
+      <div id="modalUserActions" class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal()">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新增/编辑歌曲弹窗 -->
+  <div id="songFormModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content song-form-modal">
+      <div class="modal-header">
+        <h2 id="songFormTitle">🎵 新增歌曲</h2>
+      </div>
+
+      <div class="modal-body">
+        <form id="songForm" enctype="multipart/form-data">
+          <input type="hidden" id="songId" name="id" />
+          <input type="hidden" id="existingScoreImage" name="score_image" />
+
+          <!-- 基本信息 -->
+          <div class="form-section">
+            <h3>📝 基本信息</h3>
+            <div class="form-row">
+              <div class="form-group half">
+                <label for="songTitle">歌曲名称 *</label>
+                <input type="text" id="songTitle" name="title" required />
+              </div>
+              <div class="form-group half">
+                <label for="songCategory">所属分类 *</label>
+                <select id="songCategory" name="category_id" required>
+                  <option value="">选择分类</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 诗歌图片上传 -->
+          <div class="form-section">
+            <h3>📄 完整诗歌图片</h3>
+            <div class="image-upload-area" id="scoreUploadArea">
+              <div class="upload-preview">
+                <img id="scorePreview" src="" alt="诗歌预览" style="display: none;" />
+                <div class="upload-placeholder" id="scorePlaceholder">
+                  <span class="upload-icon">📋</span>
+                  <p>点击或拖拽上传完整诗歌</p>
+                  <span class="upload-hint">支持 JPG, PNG (最大 5MB)</span>
+                </div>
+              </div>
+              <input type="file" id="scoreImage" name="scoreImage" accept="image/jpeg,image/png,image/webp" style="display: none;" />
+              <div class="upload-actions">
+                <button type="button" class="btn-secondary btn-choose-file" onclick="document.getElementById('scoreImage').click()">选择图片</button>
+                <button type="button" class="btn-danger btn-remove-file" id="removeScoreBtn" style="display: none;" onclick="removeScore()">删除诗歌</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 诗歌文字内容 -->
+          <div class="form-section">
+            <h3>🎵 诗歌文字内容（可选）</h3>
+            <div class="form-group">
+              <textarea id="songContent" name="content" rows="6" placeholder="输入诗歌内容...&#10;使用 [C] [Am] [F] 等标注和弦"></textarea>
+            </div>
+          </div>
+
+          <!-- 提交按钮 -->
+          <div class="form-actions form-actions-split">
+            <button type="button" class="btn-secondary" onclick="closeSongForm()">取消</button>
+            <button type="submit" class="btn-primary">保存</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 分类管理弹窗 -->
+  <div id="categoryFormModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content category-manage-modal">
+      <div class="modal-header">
+        <h2>📂 分类管理</h2>
+      </div>
+
+      <div class="modal-body">
+        <!-- 分类列表 -->
+        <div id="categoryManageList" class="category-manage-list">
+          <!-- 分类列表将通过JavaScript动态加载 -->
+        </div>
+      </div>
+
+      <div class="modal-footer" style="justify-content: space-between;">
+        <button class="btn-secondary" onclick="closeCategoryManageModal()">关闭</button>
+        <button id="btnAddCategory" class="btn-primary">+ 新增分类</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新增/编辑分类表单（隐藏） -->
+  <div id="categoryEditFormModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content form-modal">
+      <div class="modal-header">
+        <h2 id="categoryFormTitle">📝 新增分类</h2>
+      </div>
+
+      <div class="modal-body">
+        <form id="categoryForm">
+          <input type="hidden" id="categoryId" name="id" />
+
+          <div class="form-section">
+            <div class="form-group">
+              <label for="categoryName">分类名称 *</label>
+              <input type="text" id="categoryName" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="categoryDescription">分类描述</label>
+              <textarea id="categoryDescription" name="description" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions" style="justify-content: space-between; padding-top: 16px;">
+            <button type="button" class="btn-secondary" onclick="closeCategoryForm()">取消</button>
+            <button type="submit" class="btn-primary">保存</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 用户管理弹窗 -->
+  <div id="usersModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content users-modal">
+      <div class="modal-header">
+        <h2>👥 用户管理</h2>
+      </div>
+
+      <div class="modal-body">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>用户名</th>
+              <th>角色</th>
+              <th>创建时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <!-- 用户列表将通过JavaScript动态加载 -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer" style="justify-content: space-between;">
+        <button class="btn-secondary" onclick="closeUsersModal()">关闭</button>
+        <button id="addUserBtn" class="btn-primary">+ 新增用户</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新增/编辑用户弹窗 -->
+  <div id="userFormModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content form-modal">
+      <div class="modal-header">
+        <h2 id="userFormTitle">新增用户</h2>
+      </div>
+
+      <div class="modal-body">
+        <form id="userForm">
+          <input type="hidden" id="userId" name="id" />
+
+          <div class="form-section">
+            <div class="form-group">
+              <label for="userName">用户名 *</label>
+              <input type="text" id="userName" name="username" required />
+            </div>
+            <div class="form-group">
+              <label for="userPassword">密码 *</label>
+              <input type="password" id="userPassword" name="password" required>
+            </div>
+            <div class="form-group">
+              <label for="userRole">角色 *</label>
+              <select id="userRole" name="role" required>
+                <option value="admin">管理员</option>
+                <option value="super_admin">超级管理员</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions" style="justify-content: space-between">
+            <button type="button" class="btn-secondary" onclick="closeUserForm()">取消</button>
+            <button type="submit" class="btn-primary">保存</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 确认弹窗 -->
+  <div id="confirmModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content confirm-modal">
+      <div class="modal-header">
+        <h2 id="confirmTitle">🗑️ 确认删除</h2>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage">确定要执行此操作吗？</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeConfirmModal()">取消</button>
+        <button id="confirmBtn" class="btn-danger">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 消息弹窗 -->
+  <div id="messageModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content confirm-modal">
+      <div class="modal-header">
+        <h2 id="messageTitle">提示</h2>
+      </div>
+      <div class="modal-body">
+        <p id="messageText">消息内容</p>
+      </div>
+      <div class="modal-footer" style="justify-content: space-between">
+        <button class="btn-secondary" onclick="closeMessageModal()">取消</button>
+        <button class="btn-primary" onclick="closeMessageModal()">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 回收站弹窗 -->
+  <div id="trashModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content trash-modal">
+      <div class="modal-header">
+        <h2>🗑️ 回收站</h2>
+      </div>
+      <div class="modal-body">
+        <div id="trashEmptyState" class="empty-state trash-empty-state" style="display: none;">
+          <span class="trash-empty-icon">♻️</span>
+          <span class="trash-empty-text">回收站是空的</span>
+        </div>
+        <div id="trashList" class="trash-list">
+          <!-- 回收站歌曲列表将通过JavaScript动态加载 -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeTrashModal()">关闭</button>
+        <button id="clearTrashBtn" class="btn-danger" onclick="confirmClearTrash()">清空回收站</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">诗歌库 · 收集美好诗歌，分享音乐之美</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

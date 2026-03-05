@@ -1,0 +1,1554 @@
+/* ====================
+   全局样式
+   ==================== */
+
+:root {
+  /* 主色调 */
+  --primary-color: #6B46C1;
+  --primary-light: #9F7AEA;
+  --primary-dark: #553C9A;
+
+  /* 辅助色 */
+  --accent-color: #ED8936;
+  --success-color: #48BB78;
+  --danger-color: #F56565;
+  --info-color: #4299E1;
+
+  /* 中性色 */
+  --bg-body: #FDF6F0;
+  --bg-card: #FFFFFF;
+  --bg-sidebar: #F7EDF6;
+  --text-primary: #2D3748;
+  --text-secondary: #718096;
+  --border-color: #E2E8F0;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+
+  /* 字体 */
+  --font-family-base: 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background: var(--bg-body);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+/* ====================
+   按钮样式
+   ==================== */
+
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-login-submit,
+.btn-logout,
+.btn-login {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  color: white;
+  box-shadow: 0 4px 6px rgba(107, 70, 193, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(107, 70, 193, 0.4);
+}
+
+.btn-secondary {
+  background: white;
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #FC8181 0%, #F56565 100%);
+  color: white;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(245, 101, 101, 0.4);
+}
+
+.btn-login-submit {
+  width: 100%;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  color: white;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.btn-login-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(107, 70, 193, 0.4);
+}
+
+.btn-login,
+.btn-logout {
+  background: white;
+  border: 2px solid var(--border-color);
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.btn-login:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-logout:hover {
+  border-color: var(--danger-color);
+  color: var(--danger-color);
+}
+
+/* ====================
+   顶部导航
+   ==================== */
+
+.header {
+  background: white;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 16px 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 32px;
+}
+
+.logo h1 {
+  font-size: 24px;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.search-box input {
+  padding: 10px 12px 10px 40px;
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  font-size: 14px;
+  width: 280px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-name {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.admin-role {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: white;
+}
+
+/* ====================
+   管理员工具栏
+   ==================== */
+
+.admin-toolbar {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  padding: 16px 0;
+  box-shadow: var(--shadow-md);
+}
+
+.toolbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar-title {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-add {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-add:hover {
+  background: white;
+  color: var(--primary-color) !important;
+}
+
+/* ====================
+   主内容区
+   ==================== */
+
+.main {
+  flex: 1;
+  padding: 32px 0;
+}
+
+.main-content {
+  display: flex;
+  gap: 32px;
+}
+
+/* ====================
+   侧边栏
+   ==================== */
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+}
+
+.category-nav {
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.category-header {
+  padding: 16px 20px;
+  background: var(--primary-light);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.category-list {
+  padding: 8px 0;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  gap: 8px;
+  flex: 1;
+}
+
+.category-item:hover {
+  background: var(--bg-sidebar);
+}
+
+.category-item.active {
+  background: var(--bg-sidebar);
+  border-left-color: var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.category-name {
+  flex: 1;
+}
+
+.category-count {
+  background: var(--border-color);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.category-item.active .category-count {
+  background: var(--primary-light);
+  color: white;
+}
+
+.category-item-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 8px;
+}
+
+.category-actions {
+  display: none;
+  gap: 4px;
+  align-items: center;
+}
+
+.category-item-wrapper:hover .category-actions {
+  display: flex;
+}
+
+.category-action-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.category-action-btn:hover {
+  transform: scale(1.1);
+  background: var(--primary-light);
+}
+
+/* ====================
+   内容区
+   ==================== */
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.content-header h2 {
+  font-size: 24px;
+  color: var(--text-primary);
+}
+
+.song-count {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* ====================
+   歌曲网格
+   ==================== */
+
+.songs-grid {
+  display: block;
+  max-height: calc(100vh - 320px);
+  min-height: 400px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+/* 歌曲列表行样式 */
+.song-row-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  background: var(--bg-sidebar);
+  border-radius: 8px 8px 0 0;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.song-row-header-title {
+  flex: 1;
+}
+
+.song-row-header-category {
+  width: 120px;
+  text-align: center;
+}
+
+.song-row-header-date {
+  width: 120px;
+  text-align: center;
+}
+
+.song-row-header-actions {
+  width: 180px;
+  text-align: center;
+}
+
+.song-row-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.song-row-item:last-child {
+  border-bottom: none;
+}
+
+.song-row-item:hover {
+  background: var(--bg-body);
+}
+
+.song-row-title {
+  flex: 1;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.song-row-category {
+  background: var(--primary-light);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  width: 96px;
+  text-align: center;
+}
+
+.song-row-date {
+  color: var(--text-secondary);
+  font-size: 13px;
+  width: 120px;
+  text-align: center;
+}
+
+.song-row-actions {
+  display: flex;
+  gap: 8px;
+  width: 180px;
+  justify-content: center;
+}
+
+.btn-row {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-row-view {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-row-view:hover {
+  background: var(--primary-dark);
+}
+
+.btn-row-edit {
+  background: var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-row-edit:hover {
+  background: var(--primary-light);
+  color: white;
+}
+
+.btn-row-delete {
+  background: var(--danger-color);
+  color: white;
+}
+
+.btn-row-delete:hover {
+  opacity: 0.9;
+}
+
+/* ====================
+   歌曲卡片（图片版）
+   ==================== */
+
+.song-card-image {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.song-card-image:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg-sidebar) 0%, var(--bg-body) 100%);
+}
+
+.song-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.song-card-image:hover .song-cover {
+  transform: scale(1.05);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.badge {
+  background: rgba(107, 70, 193, 0.9);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.song-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song-meta {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 12px 0;
+}
+
+.btn-view-detail {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-view-detail:hover {
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.4);
+}
+
+/* 管理员操作按钮 */
+.admin-actions-hover {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: none;
+  gap: 8px;
+  z-index: 10;
+}
+
+.song-card-image:hover .admin-actions-hover {
+  display: flex;
+}
+
+.btn-edit,
+.btn-delete {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-edit {
+  background: white;
+  color: var(--primary-color);
+}
+
+.btn-edit:hover {
+  transform: scale(1.1);
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-delete {
+  background: white;
+  color: var(--danger-color);
+}
+
+.btn-delete:hover {
+  transform: scale(1.1);
+  background: var(--danger-color);
+  color: white;
+}
+
+/* ====================
+   空状态
+   ==================== */
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+/* ====================
+   弹窗
+   ==================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 40px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.3s ease;
+}
+
+.modal-content .modal-body {
+  overflow-y: auto;
+  flex: 1;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 版本号徽章 */
+.version-badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  background: var(--primary-light);
+  color: white;
+  border-radius: 12px;
+  margin-left: 12px;
+}
+
+/* 带有版本号的header */
+.modal-header-with-version {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header-with-version h2 {
+  margin: 0;
+}
+
+.btn-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--bg-body);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.btn-close:hover {
+  background: var(--danger-color);
+  color: white;
+}
+
+.modal-header {
+  padding-left: 20px;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* ====================
+   歌谱详情弹窗
+   ==================== */
+
+.score-header-wrapper {
+  width: 100%;
+}
+
+.score-title {
+  font-size: 28px;
+  margin-bottom: 12px;
+  text-align: center;
+  width: 100%;
+}
+
+.score-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.meta-separator {
+  color: var(--border-color);
+  font-size: 12px;
+}
+
+.text-meta {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.score-image-container {
+  position: relative;
+  background: var(--bg-body);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.score-full-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  box-shadow: var(--shadow-sm);
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.image-toolbar {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.image-toolbar button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 4px;
+  background: var(--bg-body);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.image-toolbar button:hover {
+  background: var(--border-color);
+  transform: scale(1.1);
+}
+
+.score-text-section {
+  background: var(--bg-body);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.score-text-section h3 {
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.score-text pre {
+  background: white;
+  padding: 16px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  line-height: 1.8;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* ====================
+   表单弹窗
+   ==================== */
+
+.form-modal {
+  max-width: 330px;
+}
+
+.form-modal .modal-body {
+  padding: 20px;
+}
+
+/* 用户表单特定样式 */
+#userForm .form-section {
+  padding-left: 20px;
+}
+
+#userForm .form-group {
+  width: 240px;
+}
+
+#userForm .form-group input,
+#userForm .form-group select {
+  width: 100%;
+}
+
+.song-form-modal {
+  max-width: 500px;
+  width: 95%;
+}
+
+.song-form-modal .modal-body {
+  padding: 20px;
+}
+
+.song-form-modal .form-section {
+  margin-bottom: 14px;
+}
+
+.song-form-modal .form-section h3 {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.song-form-modal .form-group input[type="text"],
+.song-form-modal .form-group input[type="password"],
+.song-form-modal .form-group select,
+.song-form-modal .form-group textarea {
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.song-form-modal .image-upload-area {
+  padding: 12px;
+}
+
+.song-form-modal .upload-preview {
+  min-height: 80px;
+  max-height: 150px;
+}
+
+.song-form-modal .upload-preview img {
+  max-height: 120px;
+}
+
+.song-form-modal .upload-icon {
+  font-size: 24px;
+}
+
+.song-form-modal .upload-placeholder p {
+  font-size: 12px;
+  margin: 0 0 2px 0;
+}
+
+.song-form-modal .upload-hint {
+  font-size: 11px;
+}
+
+/* 确认弹窗 */
+.confirm-modal {
+  max-width: 400px;
+}
+
+.confirm-modal .modal-body {
+  padding: 24px;
+  text-align: center;
+}
+
+.confirm-modal .modal-body p {
+  font-size: 15px;
+  color: var(--text-primary);
+  margin: 0 0 24px 0;
+}
+
+.confirm-modal .modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 24px 24px 24px;
+}
+
+/* 表单按钮左右分布 */
+.form-actions-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Checkbox样式 */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-right: auto;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+}
+
+.song-form-modal .upload-actions {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.category-manage-modal {
+  max-width: 500px;
+}
+
+.category-manage-modal .modal-body {
+  padding: 20px;
+}
+
+.category-manage-list {
+  max-height: 350px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.category-manage-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-color);
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.category-manage-item:last-child {
+  border-bottom: none;
+}
+
+.category-manage-item:hover {
+  background: var(--bg-body);
+}
+
+.category-manage-name {
+  font-weight: 500;
+  flex: 1;
+  font-size: 14px;
+}
+
+.category-manage-count {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-right: 16px;
+}
+
+.category-manage-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.category-manage-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+.category-manage-btn:hover {
+  background: var(--primary-light);
+  opacity: 1;
+}
+.form-section {
+  margin-bottom: 20px;
+}
+
+.form-section h3 {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group.half {
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* ====================
+   图片上传
+   ==================== */
+
+.image-upload-area {
+  background: var(--bg-body);
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.image-upload-area:hover,
+.image-upload-area.dragover {
+  border-color: var(--primary-color);
+  background: var(--bg-sidebar);
+}
+
+.upload-preview {
+  position: relative;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.upload-preview img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.upload-placeholder {
+  color: var(--text-secondary);
+}
+
+.upload-icon {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.upload-placeholder p {
+  font-size: 14px;
+  margin: 0 0 4px 0;
+}
+
+.upload-hint {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.upload-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* ====================
+   默认封面
+   ==================== */
+
+.default-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  background: var(--bg-body);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.cover-icon {
+  font-size: 48px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  border-radius: 50%;
+  color: white;
+}
+
+.cover-text {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* ====================
+   用户管理
+   ==================== */
+
+.users-modal {
+  max-width: 1000px;
+}
+
+.users-toolbar {
+  margin-bottom: 20px;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.users-table th,
+.users-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.users-table th {
+  background: var(--bg-body);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.users-table tr:hover {
+  background: var(--bg-body);
+}
+
+/* ====================
+   页脚
+   ==================== */
+
+.footer {
+  background: white;
+  padding: 16px 0;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+.footer .container {
+  max-width: 600px;
+}
+
+.footer-text {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* ====================
+   登录页面
+   ==================== */
+
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-sidebar) 0%, var(--bg-body) 100%);
+  padding: 20px;
+}
+
+.login-container {
+  background: white;
+  border-radius: 16px;
+  padding: 48px;
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 400px;
+  animation: slideUp 0.3s ease;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.logo-large {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.login-header h1 {
+  font-size: 28px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.login-header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.login-form {
+  margin-bottom: 24px;
+}
+
+.error-message {
+  background: #FED7D7;
+  color: #C53030;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.login-footer {
+  text-align: center;
+}
+
+.login-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ====================
+   响应式设计
+   ==================== */
+
+@media (max-width: 1024px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .songs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .toolbar-content {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .toolbar-actions {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .songs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    margin: 20px;
+    max-height: 85vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .upload-actions {
+    flex-direction: column;
+  }
+}
+
+/* ====================
+  回收站
+  ==================== */
+
+.trash-modal {
+  max-width: 800px;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.trash-modal .modal-body {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.trash-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trash-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg-body);
+  border-radius: 8px;
+  gap: 15px;
+}
+
+.trash-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trash-item-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.trash-item-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.trash-item-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.trash-item-actions .btn-restore {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.trash-item-actions .btn-restore:hover {
+  background: #219653;
+}
+
+.trash-empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+}
+
+.trash-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px;
+}
+
+.trash-empty-icon {
+  font-size: 24px;
+}
+
+.trash-empty-text {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
